@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import BottomNav from '../components/BottomNav';
 import { addUserPet } from '../store/petsStore';
@@ -20,7 +20,6 @@ interface FormData {
   imageUrl: string;
   description: string;
   tags: string;
-  emoji: string;
 }
 
 const INITIAL_FORM: FormData = {
@@ -34,22 +33,13 @@ const INITIAL_FORM: FormData = {
   location: '',
   imageUrl: '',
   description: '',
-  tags: '',
-  emoji: DOG_EMOJIS[0]
+  tags: ''
 };
 
 const GiveAdoptionPage: React.FC = () => {
   const navigate = useNavigate();
   const [form, setForm] = useState<FormData>(INITIAL_FORM);
   const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>({});
-
-  // Update emoji options when species changes
-  useEffect(() => {
-    const currentEmojis = form.species === 'perro' ? DOG_EMOJIS : CAT_EMOJIS;
-    if (!currentEmojis.includes(form.emoji)) {
-      setForm(prev => ({ ...prev, emoji: currentEmojis[0] }));
-    }
-  }, [form.species, form.emoji]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -105,6 +95,9 @@ const GiveAdoptionPage: React.FC = () => {
     // Fallback image if URL seems broken or empty (though validation checks empty)
     const finalImageUrl = form.imageUrl.trim() || 'https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=500&q=60';
 
+    const currentEmojis = form.species === 'perro' ? DOG_EMOJIS : CAT_EMOJIS;
+    const randomEmoji = currentEmojis[Math.floor(Math.random() * currentEmojis.length)];
+
     const newPet: Pet = {
       id: Date.now().toString(),
       name: form.name.trim(),
@@ -119,7 +112,7 @@ const GiveAdoptionPage: React.FC = () => {
       imageUrl: finalImageUrl,
       description: form.description.trim(),
       tags: tagsArray,
-      emoji: form.emoji
+      emoji: randomEmoji
     };
 
     addUserPet(newPet);
@@ -128,8 +121,6 @@ const GiveAdoptionPage: React.FC = () => {
     // For now, just redirect
     navigate('/adopta');
   };
-
-  const currentEmojis = form.species === 'perro' ? DOG_EMOJIS : CAT_EMOJIS;
 
   return (
     <div className="give-adoption-page">
@@ -158,15 +149,6 @@ const GiveAdoptionPage: React.FC = () => {
           <select name="species" className="form-select" value={form.species} onChange={handleChange}>
             <option value="perro">Perro</option>
             <option value="gato">Gato</option>
-          </select>
-        </div>
-
-        <div className="form-group">
-          <label className="form-label">Emoji</label>
-          <select name="emoji" className="form-select" value={form.emoji} onChange={handleChange}>
-            {currentEmojis.map(emoji => (
-              <option key={emoji} value={emoji}>{emoji}</option>
-            ))}
           </select>
         </div>
 
