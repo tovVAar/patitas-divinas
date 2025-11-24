@@ -1,7 +1,18 @@
-import React from 'react';
+import React, { useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
+import BottomNav from './components/BottomNav';
+import { pets } from './data/pets';
 import './home.css';
 
 const Home: React.FC = () => {
+  const navigate = useNavigate();
+
+  // Select 3 random pets for the featured section
+  const featuredPets = useMemo(() => {
+    const shuffled = [...pets].sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, 3);
+  }, []);
+
   return (
     <div className="home-container">
       {/* HEADER */}
@@ -26,12 +37,12 @@ const Home: React.FC = () => {
 
       {/* CTA BUTTONS */}
       <section className="cta-section">
-        <button className="cta-button cta-adopt">
+        <button className="cta-button cta-adopt" onClick={() => navigate('/adopta')}>
           <span className="cta-main-text">🐶 Quiero adoptar</span>
           <span className="cta-sub-text">Explora mascotas cerca de ti</span>
         </button>
         
-        <button className="cta-button cta-give">
+        <button className="cta-button cta-give" onClick={() => navigate('/dar-en-adopcion')}>
           <span className="cta-main-text">🏡 Dar en adopción</span>
           <span className="cta-sub-text">Busca un nuevo hogar para tu mascota</span>
         </button>
@@ -41,56 +52,23 @@ const Home: React.FC = () => {
       <section className="featured-section">
         <h2 className="section-title">Amigos que buscan hogar</h2>
         <div className="carousel">
-          {/* Card 1 */}
-          <div className="pet-card">
-            <div className="pet-image">🐕</div>
-            <h3 className="pet-name">Luna</h3>
-            <div className="pet-tags">
-              <span className="pet-tag">Cachorro</span>
-              <span className="pet-tag">Juguetona</span>
+          {featuredPets.map(pet => (
+            <div key={pet.id} className="pet-card" onClick={() => navigate(`/mascota/${pet.id}`)}>
+              <div className="pet-image">{pet.emoji || (pet.species === 'perro' ? '🐕' : '🐈')}</div>
+              <h3 className="pet-name">{pet.name}</h3>
+              <div className="pet-tags">
+                {pet.tags?.slice(0, 2).map(tag => (
+                  <span key={tag} className="pet-tag">{tag}</span>
+                ))}
+              </div>
+              <button className="pet-button">Ver más</button>
             </div>
-            <button className="pet-button">Ver más</button>
-          </div>
-
-          {/* Card 2 */}
-          <div className="pet-card">
-            <div className="pet-image">🐈</div>
-            <h3 className="pet-name">Max</h3>
-            <div className="pet-tags">
-              <span className="pet-tag">Tranquilo</span>
-              <span className="pet-tag">Cariñoso</span>
-            </div>
-            <button className="pet-button">Ver más</button>
-          </div>
-
-          {/* Card 3 */}
-          <div className="pet-card">
-            <div className="pet-image">🐕</div>
-            <h3 className="pet-name">Rocky</h3>
-            <div className="pet-tags">
-              <span className="pet-tag">Mediano</span>
-              <span className="pet-tag">Protector</span>
-            </div>
-            <button className="pet-button">Ver más</button>
-          </div>
+          ))}
         </div>
       </section>
 
       {/* BOTTOM NAV */}
-      <nav className="bottom-nav">
-        <div className="nav-item active">
-          <span className="nav-icon">🏠</span>
-          <span>Inicio</span>
-        </div>
-        <div className="nav-item">
-          <span className="nav-icon">🐾</span>
-          <span>Adopta</span>
-        </div>
-        <div className="nav-item">
-          <span className="nav-icon">🏡</span>
-          <span>Dar en adopción</span>
-        </div>
-      </nav>
+      <BottomNav />
     </div>
   );
 };
