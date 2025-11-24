@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { pets } from '../data/pets';
+import { getAllPets } from '../store/petsStore';
 import BottomNav from '../components/BottomNav';
 import './PetDetailPage.css';
 
@@ -8,6 +8,7 @@ const PetDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   
+  const pets = getAllPets();
   const pet = pets.find(p => p.id === id);
 
   if (!pet) {

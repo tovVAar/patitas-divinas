@@ -2,10 +2,11 @@ import React, { useState, useMemo } from 'react';
 import PetCard from '../components/PetCard';
 import PetFilters from '../components/PetFilters';
 import BottomNav from '../components/BottomNav';
-import { pets } from '../data/pets';
+import { getAllPets } from '../store/petsStore';
 import './AdoptaPage.css';
 
 const AdoptaPage: React.FC = () => {
+  const pets = useMemo(() => getAllPets(), []);
   const [searchTerm, setSearchTerm] = useState('');
   const [speciesFilter, setSpeciesFilter] = useState('Todos');
   const [genderFilter, setGenderFilter] = useState('Todos');
