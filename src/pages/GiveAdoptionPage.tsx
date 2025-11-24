@@ -60,6 +60,21 @@ const GiveAdoptionPage: React.FC = () => {
     }
   };
 
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64String = reader.result as string;
+        setForm(prev => ({ ...prev, imageUrl: base64String }));
+        if (errors.imageUrl) {
+          setErrors(prev => ({ ...prev, imageUrl: undefined }));
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   const validate = (): boolean => {
     const newErrors: Partial<Record<keyof FormData, string>> = {};
     let isValid = true;
@@ -225,15 +240,22 @@ const GiveAdoptionPage: React.FC = () => {
         </div>
 
         <div className="form-group">
-          <label className="form-label">URL de Foto</label>
+          <label className="form-label">Foto de la mascota</label>
           <input 
-            type="text" 
-            name="imageUrl" 
+            type="file" 
+            accept="image/*"
             className="form-input" 
-            value={form.imageUrl} 
-            onChange={handleChange} 
-            placeholder="https://..."
+            onChange={handleImageUpload} 
           />
+          {form.imageUrl && (
+            <div style={{ marginTop: '10px' }}>
+              <img 
+                src={form.imageUrl} 
+                alt="Vista previa" 
+                style={{ width: '100%', maxHeight: '200px', objectFit: 'cover', borderRadius: '12px' }} 
+              />
+            </div>
+          )}
           {errors.imageUrl && <span className="error-message">{errors.imageUrl}</span>}
         </div>
 
