@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react';
 import PetCard from '../components/PetCard';
 import PetFilters from '../components/PetFilters';
 import BottomNav from '../components/BottomNav';
+import Header from '../components/Header';
 import { getAllPets } from '../store/petsStore';
 import './AdoptaPage.css';
 
@@ -40,12 +41,14 @@ const AdoptaPage: React.FC = () => {
 
   return (
     <div className="adopta-page">
-      <header className="adopta-header">
-        <h1 className="adopta-title">Adopta una mascota</h1>
-        <p className="adopta-subtitle">Filtra y encuentra tu nuevo compañero</p>
-      </header>
+      <Header />
 
       <div className="adopta-content">
+        <div style={{ marginBottom: '20px', textAlign: 'center' }}>
+          <h1 className="adopta-title">Adopta una mascota</h1>
+          <p className="adopta-subtitle">Filtra y encuentra tu nuevo compañero</p>
+        </div>
+
         <PetFilters 
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}

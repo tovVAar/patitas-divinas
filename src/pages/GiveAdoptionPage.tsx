@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import BottomNav from '../components/BottomNav';
+import Header from '../components/Header';
 import { addUserPet } from '../store/petsStore';
 import { Pet } from '../types/Pet';
 import './GiveAdoptionPage.css';
@@ -124,150 +125,154 @@ const GiveAdoptionPage: React.FC = () => {
 
   return (
     <div className="give-adoption-page">
-      <header className="give-adoption-header">
-        <h1 className="give-adoption-title">Dar en adopción</h1>
-        <p className="give-adoption-subtitle">Completa los datos de tu mascota para que alguien pueda adoptarla</p>
-      </header>
-
-      <form className="adoption-form" onSubmit={handleSubmit}>
-        
-        <div className="form-group">
-          <label className="form-label">Nombre</label>
-          <input 
-            type="text" 
-            name="name" 
-            className="form-input" 
-            value={form.name} 
-            onChange={handleChange} 
-            placeholder="Ej. Firulais"
-          />
-          {errors.name && <span className="error-message">{errors.name}</span>}
+      <Header />
+      
+      <div className="give-adoption-content">
+        <div className="give-adoption-header-text">
+          <h1 className="give-adoption-title">Dar en adopción</h1>
+          <p className="give-adoption-subtitle">Completa los datos de tu mascota para que alguien pueda adoptarla</p>
         </div>
 
-        <div className="form-group">
-          <label className="form-label">Especie</label>
-          <select name="species" className="form-select" value={form.species} onChange={handleChange}>
-            <option value="perro">Perro</option>
-            <option value="gato">Gato</option>
-          </select>
-        </div>
+        <form className="adoption-form" onSubmit={handleSubmit}>
+          
+          <div className="form-group">
+            <label className="form-label">Nombre</label>
+            <input 
+              type="text" 
+              name="name" 
+              className="form-input" 
+              value={form.name} 
+              onChange={handleChange} 
+              placeholder="Ej. Firulais"
+            />
+            {errors.name && <span className="error-message">{errors.name}</span>}
+          </div>
 
-        <div className="form-group">
-          <label className="form-label">Raza</label>
-          <input 
-            type="text" 
-            name="breed" 
-            className="form-input" 
-            value={form.breed} 
-            onChange={handleChange} 
-            placeholder="Ej. Mestizo, Labrador..."
-          />
-          {errors.breed && <span className="error-message">{errors.breed}</span>}
-        </div>
+          <div className="form-group">
+            <label className="form-label">Especie</label>
+            <select name="species" className="form-select" value={form.species} onChange={handleChange}>
+              <option value="perro">Perro</option>
+              <option value="gato">Gato</option>
+            </select>
+          </div>
 
-        <div className="form-group">
-          <label className="form-label">Sexo</label>
-          <select name="gender" className="form-select" value={form.gender} onChange={handleChange}>
-            <option value="macho">Macho</option>
-            <option value="hembra">Hembra</option>
-          </select>
-        </div>
+          <div className="form-group">
+            <label className="form-label">Raza</label>
+            <input 
+              type="text" 
+              name="breed" 
+              className="form-input" 
+              value={form.breed} 
+              onChange={handleChange} 
+              placeholder="Ej. Mestizo, Labrador..."
+            />
+            {errors.breed && <span className="error-message">{errors.breed}</span>}
+          </div>
 
-        <div className="form-group">
-          <label className="form-label">Color</label>
-          <input 
-            type="text" 
-            name="color" 
-            className="form-input" 
-            value={form.color} 
-            onChange={handleChange} 
-            placeholder="Ej. Negro, Blanco con manchas..."
-          />
-          {errors.color && <span className="error-message">{errors.color}</span>}
-        </div>
+          <div className="form-group">
+            <label className="form-label">Sexo</label>
+            <select name="gender" className="form-select" value={form.gender} onChange={handleChange}>
+              <option value="macho">Macho</option>
+              <option value="hembra">Hembra</option>
+            </select>
+          </div>
 
-        <div className="form-group">
-          <label className="form-label">Edad</label>
-          <input 
-            type="text" 
-            name="age" 
-            className="form-input" 
-            value={form.age} 
-            onChange={handleChange} 
-            placeholder="Ej. 3 meses, 2 años..."
-          />
-          {errors.age && <span className="error-message">{errors.age}</span>}
-        </div>
+          <div className="form-group">
+            <label className="form-label">Color</label>
+            <input 
+              type="text" 
+              name="color" 
+              className="form-input" 
+              value={form.color} 
+              onChange={handleChange} 
+              placeholder="Ej. Negro, Blanco con manchas..."
+            />
+            {errors.color && <span className="error-message">{errors.color}</span>}
+          </div>
 
-        <div className="form-group">
-          <label className="form-label">Tamaño</label>
-          <select name="size" className="form-select" value={form.size} onChange={handleChange}>
-            <option value="pequeño">Pequeño</option>
-            <option value="mediano">Mediano</option>
-            <option value="grande">Grande</option>
-          </select>
-        </div>
+          <div className="form-group">
+            <label className="form-label">Edad</label>
+            <input 
+              type="text" 
+              name="age" 
+              className="form-input" 
+              value={form.age} 
+              onChange={handleChange} 
+              placeholder="Ej. 3 meses, 2 años..."
+            />
+            {errors.age && <span className="error-message">{errors.age}</span>}
+          </div>
 
-        <div className="form-group">
-          <label className="form-label">Ubicación</label>
-          <input 
-            type="text" 
-            name="location" 
-            className="form-input" 
-            value={form.location} 
-            onChange={handleChange} 
-            placeholder="Ej. CDMX - Narvarte"
-          />
-          {errors.location && <span className="error-message">{errors.location}</span>}
-        </div>
+          <div className="form-group">
+            <label className="form-label">Tamaño</label>
+            <select name="size" className="form-select" value={form.size} onChange={handleChange}>
+              <option value="pequeño">Pequeño</option>
+              <option value="mediano">Mediano</option>
+              <option value="grande">Grande</option>
+            </select>
+          </div>
 
-        <div className="form-group">
-          <label className="form-label">Foto de la mascota</label>
-          <input 
-            type="file" 
-            accept="image/*"
-            className="form-input" 
-            onChange={handleImageUpload} 
-          />
-          {form.imageUrl && (
-            <div style={{ marginTop: '10px' }}>
-              <img 
-                src={form.imageUrl} 
-                alt="Vista previa" 
-                style={{ width: '100%', maxHeight: '200px', objectFit: 'cover', borderRadius: '12px' }} 
-              />
-            </div>
-          )}
-          {errors.imageUrl && <span className="error-message">{errors.imageUrl}</span>}
-        </div>
+          <div className="form-group">
+            <label className="form-label">Ubicación</label>
+            <input 
+              type="text" 
+              name="location" 
+              className="form-input" 
+              value={form.location} 
+              onChange={handleChange} 
+              placeholder="Ej. CDMX - Narvarte"
+            />
+            {errors.location && <span className="error-message">{errors.location}</span>}
+          </div>
 
-        <div className="form-group">
-          <label className="form-label">Descripción</label>
-          <textarea 
-            name="description" 
-            className="form-textarea" 
-            value={form.description} 
-            onChange={handleChange} 
-            placeholder="Cuéntanos sobre su personalidad, historia, etc."
-          />
-          {errors.description && <span className="error-message">{errors.description}</span>}
-        </div>
+          <div className="form-group">
+            <label className="form-label">Foto de la mascota</label>
+            <input 
+              type="file" 
+              accept="image/*"
+              className="form-input" 
+              onChange={handleImageUpload} 
+            />
+            {form.imageUrl && (
+              <div style={{ marginTop: '10px' }}>
+                <img 
+                  src={form.imageUrl} 
+                  alt="Vista previa" 
+                  style={{ width: '100%', maxHeight: '200px', objectFit: 'cover', borderRadius: '12px' }} 
+                />
+              </div>
+            )}
+            {errors.imageUrl && <span className="error-message">{errors.imageUrl}</span>}
+          </div>
 
-        <div className="form-group">
-          <label className="form-label">Tags (separados por coma)</label>
-          <input 
-            type="text" 
-            name="tags" 
-            className="form-input" 
-            value={form.tags} 
-            onChange={handleChange} 
-            placeholder="Ej. Juguetón, Cariñoso, Vacunado"
-          />
-          {errors.tags && <span className="error-message">{errors.tags}</span>}
-        </div>
+          <div className="form-group">
+            <label className="form-label">Descripción</label>
+            <textarea 
+              name="description" 
+              className="form-textarea" 
+              value={form.description} 
+              onChange={handleChange} 
+              placeholder="Cuéntanos sobre su personalidad, historia, etc."
+            />
+            {errors.description && <span className="error-message">{errors.description}</span>}
+          </div>
 
-        <button type="submit" className="submit-btn">Publicar mascota</button>
-      </form>
+          <div className="form-group">
+            <label className="form-label">Tags (separados por coma)</label>
+            <input 
+              type="text" 
+              name="tags" 
+              className="form-input" 
+              value={form.tags} 
+              onChange={handleChange} 
+              placeholder="Ej. Juguetón, Cariñoso, Vacunado"
+            />
+            {errors.tags && <span className="error-message">{errors.tags}</span>}
+          </div>
+
+          <button type="submit" className="submit-btn">Publicar mascota</button>
+        </form>
+      </div>
 
       <BottomNav />
     </div>
