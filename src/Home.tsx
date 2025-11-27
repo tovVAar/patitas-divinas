@@ -1,7 +1,9 @@
 import React, { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import BottomNav from './components/BottomNav';
+import Header from './components/Header';
 import { pets } from './data/pets';
+import heroImage from './assets/hero.png';
 import './home.css';
 
 const Home: React.FC = () => {
@@ -16,23 +18,15 @@ const Home: React.FC = () => {
   return (
     <div className="home-container">
       {/* HEADER */}
-      <header className="header">
-        <div className="logo-container">
-          <div className="logo-top">
-            <div className="logo-icon">🐾</div>
-            <div className="beta-pill">BETA</div>
-          </div>
-          <div className="logo-tagline">Encuentra un hogar, regala amor</div>
-        </div>
-      </header>
+      <Header />
 
       {/* HERO */}
       <section className="hero">
         <div className="hero-illustration">
-          {/* Placeholder for illustration */}
+          <img src={heroImage} alt="Mascotas felices" className="hero-img" />
         </div>
-        <h1 className="hero-title">Adopta o ayuda con una donación</h1>
-        <p className="hero-subtitle">Todo para darles una segunda oportunidad 🐾</p>
+        <h1 className="hero-title">Patitas Divinas</h1>
+        <p className="hero-subtitle">Tu nuevo amigo te espera 🐾</p>
       </section>
 
       {/* CTA BUTTONS */}

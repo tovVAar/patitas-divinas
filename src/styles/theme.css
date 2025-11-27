@@ -1,0 +1,25 @@
+:root {
+  /* Brand Colors */
+  --color-primary: #F57A3D;        /* naranja del perro */
+  --color-primary-soft: #FFE2D0;   /* versión pastel para fondos */
+
+  --color-secondary: #6CC24A;      /* verde de "DIVINAS" / contorno gato */
+  --color-secondary-soft: #E2F6D9;
+
+  --color-accent: #00A3D9;         /* azul contorno gato/cola */
+  --color-accent-soft: #DFF4FF;
+
+  /* Neutral Colors */
+  --color-bg: #FFFDF9;             /* fondo general de la app */
+  --color-surface: #FFFFFF;        /* cards, barras, secciones */
+  --color-border-soft: #E5E7EB;
+
+  /* Text Colors */
+  --color-text-main: #1F2937;      /* similar al texto “PATITAS” */
+  --color-text-muted: #6B7280;
+
+  /* State Colors */
+  --color-success: #35B176;
+  --color-warning: #FFC857;
+  --color-error: #F87171;
+}
