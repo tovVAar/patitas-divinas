@@ -36,8 +36,9 @@ const Header: React.FC = () => {
               <p>El objetivo es facilitar la adopción de mascotas y promover el bienestar animal a través de una plataforma amigable y accesible.</p>
               <p><strong>Institución:</strong> <a href='https://infotec.mx/'>INFOTEC</a></p>
               <p><strong>Nombre de la clase:</strong> Administración de proyectos de TIC 2025-2</p>
-              <p><strong>Integrantes del equipo:</strong></p>
               <p><strong>Nombre de la Actividad:</strong> 5A. Presentación final del proyecto</p>
+              <p><strong>Profesor:</strong> <a href='https://aulavirtual.infotec.mx/pluginfile.php/139021/block_html/content/Semblanza_Dr_FedericoAndre%CC%81sVargasCarrillo.pdf'>Dr. Federico Andrés Vargas Carrillo</a></p>
+              <p><strong>Integrantes del equipo:</strong></p>
               <ul style={{ paddingLeft: '20px', margin: '10px 0' }}>
                 <li>Claudia Lourdes Velasco Marcos</li>
                 <li>Francisco Sánchez Torres</li>
